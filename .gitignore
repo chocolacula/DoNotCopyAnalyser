@@ -1,0 +1,5 @@
+﻿.vs
+DoNotCopyAnalyser/bin
+DoNotCopyAnalyser/obj
+DoNotCopyAnalyser.Vsix/bin
+DoNotCopyAnalyser.Vsix/obj
