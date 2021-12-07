@@ -1,6 +1,7 @@
-This analyzer can protect you from stupid errors in some projects
+This analyzer brings to the table a bit of functional programming by providing some statelessness.
+It can protect you from stupid errors in some projects
 
-It's useful with working with a kinda global data like singleton. For example you have this:
+It's useful in case of working with kinda global data like singleton. For example you have this:
 
 ```csharp
 class SomeSingetonClass
@@ -11,9 +12,9 @@ class SomeSingetonClass
 }
 ```
 
-And you decided to cache `Data` in a private field inside another class to stop use `SomeSingetonClass.Instance.Data.FieldName` in code. In this case you would screw up if `Data` in `SomeSingetonClass` changed by deserialisation from disk or network or by something else.
+And you decided to cache `Data` in a private field inside another one class to stop use `SomeSingetonClass.Instance.Data.SubField1.SubField2.FieldName` in a code. In this case you would screw up if `Data` in `SomeSingetonClass` changed unexpectedly by deserialisation or by somebody else in another thread, etc.
 
-To prevent this case you can add `[DoNotCopy]` attribute to the field. 
+To prevent this behaviour you can add `[DoNotCopy]` attribute to the field. 
 
 ```csharp
 class SomeSingetonClass
@@ -24,5 +25,5 @@ class SomeSingetonClass
     public readonly Data = new Data();
 }
 ```
-
-It will go to a compilation error and you'll have to use your changable global data directly. 
+You cannot copy the object like underlying pointer anymore, now you have one less state.
+It will lead to a compilation error and you'll have to use your changable global data directly.
